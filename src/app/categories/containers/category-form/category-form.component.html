@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-toolbar color="primary">Categoria</mat-toolbar>
+
+  <mat-card-content>
+    <form [formGroup]="form" class="min-width">
+      <mat-form-field class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" #name />
+        <mat-hint align="end">{{ name.value.length }} / 100</mat-hint>
+        <mat-error *ngIf="form.get('name')?.invalid">
+          {{ getErrorMessage('name') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Icon</mat-label>
+        <input matInput formControlName="icon" #icon [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let iconValue of icons | async" [value]="iconValue.label">
+            <mat-icon color="accent">{{ iconValue.label }}</mat-icon>
+            <span>{{iconValue.label}}</span>
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="form.get('icon')?.invalid">{{
+          getErrorMessage('icon')
+        }}</mat-error>
+      </mat-form-field>
+      
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions class="actions-center">
+    <button mat-raised-button color="primary" (click)="onSubmit()" type="submit">
+      Salvar
+    </button>
+    <button mat-raised-button (click)="onCancel()" class="btn-space" type="button">
+      Cancelar
+    </button>
+  </mat-card-actions>
+</mat-card>

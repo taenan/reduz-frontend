@@ -1,0 +1,50 @@
+<mat-table [dataSource]="categories">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
+    <mat-cell *matCellDef="let category">{{ category.name }}</mat-cell>
+  </ng-container>
+
+  <!-- Category Column -->
+  <ng-container matColumnDef="icon">
+    <mat-header-cell *matHeaderCellDef>Ícone</mat-header-cell>
+    <mat-cell *matCellDef="let category">
+      <mat-icon color="accent">{{ category.icon }}</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button
+        mat-mini-fab
+        color="accent"
+        aria-label="Adicionar uma nova Categoria"
+        (click)="onAdd()"
+        class="action-column-header">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let category" class="action-column">
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Atualizar Categoria"
+        (click)="onEdit(category)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Remover Categoria"
+        (click)="onRemove(category)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
