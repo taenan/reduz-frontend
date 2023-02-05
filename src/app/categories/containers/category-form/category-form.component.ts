@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -44,11 +44,11 @@ export class CategoryFormComponent implements OnInit {
       id: [category.id],
       name: [
         category.name,
-        [Validators.required, Validators.minLength(2), Validators.maxLength(100)]
+        [Validators.required, Validators.minLength(2), Validators.maxLength(50)]
       ],
       icon: [
         category.icon,
-        [Validators.required, validateIcon]
+        [Validators.required, Validators.maxLength(30), validateIcon]
       ]
     });
 
@@ -65,7 +65,7 @@ export class CategoryFormComponent implements OnInit {
     if (this.form.valid) {
       this.categoriesService.save(this.form.value as Category).subscribe({
         next: () => this.onSuccess(),
-        error: () => this.onError()
+        error: e => this.onError(e)
       });
     } else {
       this.formUtils.validateAllFormFields(this.form);
@@ -81,9 +81,9 @@ export class CategoryFormComponent implements OnInit {
     this.onCancel();
   }
 
-  private onError() {
+  private onError(errorResponse: HttpErrorResponse) {
     this.dialog.open(ErrorDialogComponent, {
-      data: 'Ocorreu um erro ao salvar a categoria.'
+      data: errorResponse.error['userMessage']
     });
   }
 
