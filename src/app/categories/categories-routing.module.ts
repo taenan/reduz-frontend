@@ -7,7 +7,8 @@ import { CategoryFormComponent } from './containers/category-form/category-form.
 
 const routes: Routes = [
   { path: '', component: CategoriesComponent },
-  { path: 'new', component: CategoryFormComponent, resolve: { category: CategoryResolver } }
+  { path: 'new', component: CategoryFormComponent, resolve: { category: CategoryResolver } },
+  { path: 'edit/:id', component: CategoryFormComponent, resolve: { category: CategoryResolver } }
 ];
 
 @NgModule({

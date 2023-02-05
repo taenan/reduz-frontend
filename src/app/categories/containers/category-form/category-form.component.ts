@@ -38,7 +38,7 @@ export class CategoryFormComponent implements OnInit {
 
   ngOnInit(): void {
     const category: Category = this.route.snapshot.data['category'];
-    const validateIcon = () => this.iconsCache.length > 0 && this.iconsCache.filter(icon => icon.label.toLowerCase().includes(this.form.get('icon')?.value.toLowerCase())).length == 0 ?  { invalidIcon: true } : null
+    const validateIcon = () => this.iconsCache.length > 0 && this.iconsCache.filter(icon => icon.label.toLowerCase().includes(this.form.get('icon')?.value.toLowerCase())).length == 0 ? { invalidIcon: true } : null
 
     this.form = this.formBuilder.group({
       id: [category.id],
@@ -77,7 +77,7 @@ export class CategoryFormComponent implements OnInit {
   }
 
   private onSuccess() {
-    this.snackBar.open('Categoria cadastrada!', '', { duration: 5000 });
+    this.snackBar.open(`Categoria ${this.form.value.id ? 'Atualizada' : 'Criada'}!`, '', { duration: 5000 });
     this.onCancel();
   }
 
