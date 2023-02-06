@@ -11,7 +11,7 @@ import { Category } from '../../model/category';
 })
 
 export class CategoryViewComponent implements OnInit {
-  course: Category | null = null;
+  course!: Category;
 
   constructor(private route: ActivatedRoute) { }
 

@@ -8,6 +8,7 @@ import { ErrorDialogComponent } from '../../../shared/components/error-dialog/er
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { CategoriesService } from 'src/app/categories/services/categories.service';
 import { Category } from 'src/app/categories/model/category'
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-categories',
@@ -31,16 +32,16 @@ export class CategoriesComponent implements OnInit {
 
   refresh() {
     this.categories$ = this.categoriesService.list().pipe(
-      catchError(() => {
-        this.onError('Erro ao carregar categorias.');
+      catchError((e) => {
+        this.onError(e);
         return of([]);
       })
     );
   }
 
-  onError(errorMsg: string) {
+  onError(errorResponse: HttpErrorResponse) {
     this.dialog.open(ErrorDialogComponent, {
-      data: errorMsg
+      data: errorResponse.error['userMessage']
     });
   }
 
@@ -54,7 +55,7 @@ export class CategoriesComponent implements OnInit {
 
   onRemove(category: Category) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: 'Tem certeza que deseja apagar esta categoria?'
+      data: 'Tem certeza que deseja remover esta categoria?'
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
@@ -68,7 +69,7 @@ export class CategoriesComponent implements OnInit {
               horizontalPosition: 'center'
             });
           },
-          error: () => this.onError('Erro ao remover uma categoria.')
+          error: (e) => this.onError(e)
         });
       }
     });

@@ -82,8 +82,9 @@ export class CategoryFormComponent implements OnInit {
   }
 
   private onError(errorResponse: HttpErrorResponse) {
+    const error = errorResponse.error['userMessage'] + errorResponse.error['objects']?.map( (e: any) => ` Campo ${e['name']}, ${e['userMessage']}.`)
     this.dialog.open(ErrorDialogComponent, {
-      data: errorResponse.error['userMessage']
+      data: error
     });
   }
 
