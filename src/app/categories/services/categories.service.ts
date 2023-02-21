@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { first, map, of, tap } from 'rxjs';
+import { Icon } from 'src/app/shared/models/icons.model';
 
 import { Category } from '../model/category';
 import { CategoryPage } from '../model/category-page';
@@ -32,15 +33,23 @@ export class CategoriesService {
     return this.getById(id);
   }
 
-  private getById(id: number) {
-    return this.http.get<Category>(`${this.API}/${id}`).pipe(first());
-  }
-
   save(record: Partial<Category>) {
     if (record.id) {
       return this.update(record);
     }
     return this.create(record);
+  }
+
+  remove(id: string) {
+    return this.http.delete<Category>(`${this.API}/${id}`).pipe(first());
+  }
+
+  loadIcons() {
+    return this.http.get<Icon[]>('assets/icons.json').pipe(first());
+  }
+
+  private getById(id: number) {
+    return this.http.get<Category>(`${this.API}/${id}`).pipe(first());
   }
 
   private update(record: Partial<Category>) {
@@ -51,7 +60,7 @@ export class CategoriesService {
     return this.http.post<Category>(this.API, record).pipe(first());
   }
 
-  remove(id: string) {
-    return this.http.delete<Category>(`${this.API}/${id}`).pipe(first());
-  }
+
+
+
 }

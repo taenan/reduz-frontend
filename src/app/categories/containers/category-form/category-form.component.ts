@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
-import { first, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { Icon } from 'src/app/shared/models/icons.model';
@@ -23,7 +23,6 @@ export class CategoryFormComponent implements OnInit {
   form!: FormGroup;
   icons: Observable<Icon[]> | undefined;
   iconsCache: Icon[] = [];
-  me: any
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -32,7 +31,6 @@ export class CategoryFormComponent implements OnInit {
     private dialog: MatDialog,
     private location: Location,
     private route: ActivatedRoute,
-    private http: HttpClient,
     public formUtils: FormUtilsService
   ) { }
 
@@ -82,7 +80,12 @@ export class CategoryFormComponent implements OnInit {
   }
 
   private onError(errorResponse: HttpErrorResponse) {
-    const error = errorResponse.error['userMessage'] + errorResponse.error['objects']?.map( (e: any) => ` Campo ${e['name']}, ${e['userMessage']}.`)
+    let error = errorResponse.error['userMessage'] ? errorResponse.error['userMessage'] : "Ocorreu um erro, tente novamente mais tarde";
+
+    if (errorResponse.error['objects']) {
+      error += errorResponse.error['objects']?.map((e: any) => ` Campo ${e['name']}, ${e['userMessage']}.`)
+    }
+
     this.dialog.open(ErrorDialogComponent, {
       data: error
     });
@@ -91,8 +94,7 @@ export class CategoryFormComponent implements OnInit {
   private _filterIcons(search: String): Icon[] {
     const filterValue = search.toLowerCase();
     if (this.iconsCache.length == 0) {
-      this.http.get<Icon[]>('assets/icons.json')
-        .pipe(first())
+      this.categoriesService.loadIcons()
         .subscribe(icons => this.iconsCache = icons)
     }
     return this.iconsCache.filter(icon => icon.label.toLowerCase().includes(filterValue)).slice(0, 5)

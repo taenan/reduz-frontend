@@ -5,6 +5,7 @@ import { FormControl, FormGroup, UntypedFormArray, UntypedFormControl, UntypedFo
   providedIn: 'root'
 })
 export class FormUtilsService {
+
   validateAllFormFields(formGroup: UntypedFormGroup | UntypedFormArray) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
@@ -54,6 +55,18 @@ export class FormUtilsService {
 
     if (field?.hasError('invalidIcon') && field.errors) {
       return `Não é um ícone válido.`;
+    }
+
+    if (field?.hasError('invalidIcon') && field.errors) {
+      return `Não é um ícone válido.`;
+    }
+
+    if (field?.hasError('invalidIcon') && field.errors) {
+      return `Não é um ícone válido.`;
+    }
+
+    if (field?.hasError('invalidUrl') && field.errors) {
+      return `URL inválida.`;
     }
     
     return field['errors'] ? 'Error' : '';

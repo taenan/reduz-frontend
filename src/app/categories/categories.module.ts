@@ -7,12 +7,11 @@ import { ConfirmationDialogComponent } from '../shared/components/confirmation-d
 import { ErrorDialogComponent } from '../shared/components/error-dialog/error-dialog.component';
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { CategoriesComponent } from './containers/categories/categories.component';
-import { CategoryViewComponent } from './components/category-view/category-view.component';
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 import { CategoryFormComponent } from './containers/category-form/category-form.component';
 
 @NgModule({
-  declarations: [CategoriesComponent, CategoryViewComponent, CategoriesListComponent, CategoryFormComponent],
+  declarations: [CategoriesComponent, CategoriesListComponent, CategoryFormComponent],
   imports: [
     CommonModule,
     CategoriesRoutingModule,

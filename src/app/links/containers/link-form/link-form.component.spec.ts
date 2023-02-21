@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryViewComponent } from './category-view.component';
+import { LinkFormComponent } from './link-form.component';
 
-describe('CategoryViewComponent', () => {
-  let component: CategoryViewComponent;
-  let fixture: ComponentFixture<CategoryViewComponent>;
+describe('LinkFormComponent', () => {
+  let component: LinkFormComponent;
+  let fixture: ComponentFixture<LinkFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CategoryViewComponent ]
+      declarations: [ LinkFormComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CategoryViewComponent);
+    fixture = TestBed.createComponent(LinkFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
