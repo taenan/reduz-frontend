@@ -1,4 +1,4 @@
-<mat-grid-list [cols]="cols" rowHeight="425px">
+<mat-grid-list [cols]="cols" rowHeight="500px">
   <mat-grid-tile *ngFor="let link of links">
     <mat-card class="card">
       <div>
@@ -19,21 +19,28 @@
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <span class="mdc-list-item__secondary-text">Criação: {{ link.createdAt | datePt }} | 
+            <span class="mdc-list-item__secondary-text">Criação: {{ link.createdAt | datePt }} |
               Cliques: {{ link.counter }}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <span class="mdc-list-item__secondary-text" [title]="link.original">Original: {{ link.original | truncateText : 35 }}</span>
+            <span class="mdc-list-item__secondary-text" [title]="link.original">Original: {{ link.original }}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <a mat-button href="{{ host }}/{{ link.slug }}" target="_blank" title="Ir para {{ link.original }}" class="link" (click)="onClick()">
-              {{ host+"/"+link.slug | truncateText : 35 }}
+            <a mat-button href="{{ host }}/{{ link.slug }}" target="_blank" title="Ir para {{ link.original }}"
+              class="link" (click)="onClick()">
+              {{ host+"/"+link.slug | truncateText : 30 }}
             </a>
             <button mat-icon-button color="primary" [cdkCopyToClipboard]="host+'/'+link.slug" (click)="onCopied()"
-            title="Copiar Link">
+              title="Copiar Link">
               <mat-icon>content_copy</mat-icon>
+            </button>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <button mat-icon-button matTooltip="Warn" color="warn" title="Excluir Link" class="center" (click)="onRemove(link)">
+              <mat-icon>delete</mat-icon>
             </button>
           </mat-list-item>
         </mat-list>

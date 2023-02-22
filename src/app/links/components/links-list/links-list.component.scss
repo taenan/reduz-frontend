@@ -1,7 +1,9 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
 .card {
-  max-width: 375px;
+  // max-width: 375px;
   border-top: 1px solid beige;
-  min-height: 400px;
 }
 
 .card-header {
@@ -39,4 +41,9 @@
 .link{
   margin: 0;
   padding: 0;
+}
+
+.center {
+  margin: 0 auto;
+  display: flex;
 }
