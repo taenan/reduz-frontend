@@ -1,1 +1,43 @@
-<p>links-list works!</p>
+<mat-grid-list [cols]="cols" rowHeight="425px">
+  <mat-grid-tile *ngFor="let link of links">
+    <mat-card class="card">
+      <div>
+        <div class="actions">
+          <img mat-card-image [attr.src]="link.favicon">
+        </div>
+        <mat-card-header class="card-header">
+          <div mat-card-avatar class="link-header-image"><img mat-card-image [attr.src]="link.favicon"></div>
+          <mat-card-title>{{ link.title | truncateText }}</mat-card-title>
+        </mat-card-header>
+      </div>
+      <mat-card-footer>
+        <mat-list>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon matListItemIcon>{{ link.category.icon }}</mat-icon>
+            <span class="mdc-list-item__secondary-text">{{ link.category.name }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span class="mdc-list-item__secondary-text">Criação: {{ link.createdAt | datePt }} | 
+              Cliques: {{ link.counter }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span class="mdc-list-item__secondary-text" [title]="link.original">Original: {{ link.original | truncateText : 35 }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <a mat-button href="{{ host }}/{{ link.slug }}" target="_blank" title="Ir para {{ link.original }}" class="link">
+              {{ host+"/"+link.slug | truncateText : 35 }}
+            </a>
+            <button mat-icon-button color="primary" [cdkCopyToClipboard]="host+'/'+link.slug" (click)="onCopied()"
+            title="Copiar Link">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-footer>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

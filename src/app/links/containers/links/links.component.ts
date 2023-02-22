@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
 
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component'
@@ -21,9 +20,7 @@ export class LinksComponent implements OnInit {
   constructor(
     private linksService: LinksService,
     public dialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -43,14 +40,6 @@ export class LinksComponent implements OnInit {
     this.dialog.open(ErrorDialogComponent, {
       data: errorResponse.error['userMessage']
     });
-  }
-
-  onAdd() {
-    this.router.navigate(['new'], { relativeTo: this.route });
-  }
-
-  onEdit(link: Link) {
-    this.router.navigate(['edit', link.id], { relativeTo: this.route });
   }
 
   onRemove(link: Link) {

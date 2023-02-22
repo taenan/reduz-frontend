@@ -7,6 +7,6 @@ export class Link {
 	favicon!: string;
   original!: string;
   counter!: number;
-  created_at!: Date;
+  createdAt!: Date;
   category!: Category
 }

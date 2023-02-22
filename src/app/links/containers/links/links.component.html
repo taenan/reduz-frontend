@@ -1,2 +1,18 @@
-<p>links works!</p>
-<app-link-form></app-link-form>
+<app-link-form (refresh)="refresh()"></app-link-form>
+<mat-card appearance="outlined">
+  <mat-toolbar color="primary">Meus Links</mat-toolbar>
+
+  <div class="mat-elevation-z8">
+    <app-links-list
+      *ngIf="links$ | async as links; else loading"
+      [links]="links"
+      (remove)="onRemove($event)">
+    </app-links-list>
+
+    <ng-template #loading>
+      <div class="loading-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+  </div>
+</mat-card>

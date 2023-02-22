@@ -21,18 +21,18 @@
             </div>
           </div>
           <mat-form-field class="fill">
-          <mat-select placeholder="Categoria *" formControlName="category" #category>
-            <mat-option *ngFor="let category of categories$ | async" [value]="category">
-              <mat-icon>{{ category.icon }}</mat-icon>{{ category.name }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="form.get('category')?.invalid">
-            {{ getErrorMessage('category') }}
-          </mat-error>
-          <mat-error *ngIf="form.get('title')?.invalid">
-            {{ getErrorMessage('title') }}
-          </mat-error>
-        </mat-form-field>
+            <mat-select placeholder="Categoria *" formControlName="category" #category>
+              <mat-option *ngFor="let category of categories$ | async" [value]="category">
+                <mat-icon>{{ category.icon }}</mat-icon>{{ category.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('category')?.invalid">
+              {{ getErrorMessage('category') }}
+            </mat-error>
+            <mat-error *ngIf="form.get('title')?.invalid">
+              {{ getErrorMessage('title') }}
+            </mat-error>
+          </mat-form-field>
           <mat-card-actions>
             <button mat-raised-button color="primary" (click)="onSubmit()" type="submit">
               Gerar Link Reduzido

@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TruncateTextPipe implements PipeTransform {
 
-  transform(value: string, limit = 100, ellipsis = '...') {
+  transform(value: string, limit = 90, ellipsis = '...') {
     return value && value.length > limit ? value.substring(0, limit) + ellipsis : value;
   }
 

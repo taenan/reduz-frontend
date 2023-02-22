@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormUtilsService } from 'src/app/shared/services/form-utils.service';
@@ -18,6 +18,8 @@ import { ValidatorUtilsService } from 'src/app/shared/services/validator-utils.s
 
 export class LinkFormComponent implements OnInit {
   readonly DEFAULT_FAVICON_PATH = './assets/default-favicon.webp';
+
+  @Output() refresh: EventEmitter<boolean> = new EventEmitter(false);
 
   form!: FormGroup;
   defaultFavicon: String = this.DEFAULT_FAVICON_PATH;
@@ -55,7 +57,7 @@ export class LinkFormComponent implements OnInit {
               catchError(() => EMPTY)
             )
           : EMPTY
-        ),
+        )
       )
       .subscribe((data) => data ? this.populateForm(data) : {});
   }
@@ -82,6 +84,7 @@ export class LinkFormComponent implements OnInit {
   private onSuccess() {
     this.snackBar.open('Link Criado!', '', { duration: 5000 });
     this.onCancel();
+    this.refresh.emit(true)
   }
 
   private onError(errorResponse: HttpErrorResponse) {

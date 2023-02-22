@@ -10,7 +10,6 @@ import { LinksComponent } from './containers/links/links.component';
 import { LinkViewComponent } from './components/link-view/link-view.component';
 import { LinksListComponent } from './components/links-list/links-list.component';
 import { LinkFormComponent } from './containers/link-form/link-form.component';
-import { LinkShowComponent } from './components/link-show/link-show.component';
 import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
@@ -18,8 +17,7 @@ import { PipesModule } from '../pipes/pipes.module';
     LinksComponent,
     LinksListComponent,
     LinkViewComponent,
-    LinkFormComponent,
-    LinkShowComponent
+    LinkFormComponent
   ],
   imports: [
     CommonModule,

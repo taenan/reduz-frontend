@@ -36,8 +36,12 @@ export class LinksService {
     return this.getById(id);
   }
 
-  private getById(id: number) {
-    return this.http.get<Link>(`${this.API}/${id}`).pipe(first());
+  loadBySlug(slug: string) {
+    if (this.cache.length > 0) {
+      const record = this.cache.find(record => `${record.slug}` === `${slug}`);
+      return record != null ? of(record) : this.getBySlug(slug);
+    }
+    return this.getBySlug(slug);
   }
 
   save(record: Partial<Link>) {
@@ -45,6 +49,10 @@ export class LinksService {
       return this.update(record);
     }
     return this.create(record);
+  }
+
+  remove(id: string) {
+    return this.http.delete<Link>(`${this.API}/${id}`).pipe(first());
   }
 
   private update(record: Partial<Link>) {
@@ -55,8 +63,12 @@ export class LinksService {
     return this.http.post<Link>(this.API, record).pipe(first());
   }
 
-  remove(id: string) {
-    return this.http.delete<Link>(`${this.API}/${id}`).pipe(first());
+  private getById(id: number) {
+    return this.http.get<Link>(`${this.API}/${id}`).pipe(first());
   }
 
+  private getBySlug(slug: string) {
+    return this.http.get<Link>(`${this.API}/findbyslug?slug=${slug}`).pipe(first());
+  }
+  
 }

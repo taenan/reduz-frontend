@@ -1,0 +1,42 @@
+.card {
+  max-width: 375px;
+  border-top: 1px solid beige;
+  min-height: 400px;
+}
+
+.card-header {
+  width: 300px;
+  word-break: break-word;
+}
+
+.mat-mdc-card-title {
+  font-size: 1em;
+}
+
+.link-header-image img {
+  width: 40px;
+  height: 40px;
+}
+
+.actions {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.actions img {
+  width: 50%;
+  height: 50%;
+}
+
+.mdc-card__actions {
+  justify-content: center;
+}
+
+.mat-mdc-card-footer{
+  text-align: left;
+}
+
+.link{
+  margin: 0;
+  padding: 0;
+}

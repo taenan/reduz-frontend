@@ -10,16 +10,11 @@ import { Category } from '../../model/category';
 
 export class CategoriesListComponent {
   @Input() categories: Category[] = [];
-  @Output() details: EventEmitter<Category> = new EventEmitter(false);
   @Output() edit: EventEmitter<Category> = new EventEmitter(false);
   @Output() remove: EventEmitter<Category> = new EventEmitter(false);
   @Output() add: EventEmitter<boolean> = new EventEmitter(false);
 
   readonly displayedColumns = ['name', 'icon', 'actions'];
-
-  onDetails(record: Category) {
-    this.details.emit(record);
-  }
 
   onAdd() {
     this.add.emit(true);
