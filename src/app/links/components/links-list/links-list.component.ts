@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LinksListComponent {
   @Input() links: Link[] = [];
   @Output() remove: EventEmitter<Link> = new EventEmitter(false);
+  @Output() refresh: EventEmitter<boolean> = new EventEmitter(false);
 
   innerWidth: any;
   cols!: number
@@ -40,6 +41,12 @@ export class LinksListComponent {
 
   onCopied(){
     this.snackBar.open("Link copiado!", '', { duration: 5000 });
+  }
+
+  onClick(){
+    setTimeout(() => {
+      this.refresh.emit(true)
+    }, 4000);
   }
 
   private getCol() {

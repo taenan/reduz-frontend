@@ -1,7 +1,7 @@
 import { Category } from "src/app/categories/model/category";
 
 export class Link {
-  id!: string;
+  id!: number;
   slug!: string;
   title!: string;
 	favicon!: string;

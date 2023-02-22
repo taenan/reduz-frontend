@@ -51,8 +51,12 @@ export class LinksService {
     return this.create(record);
   }
 
-  remove(id: string) {
+  remove(id: number) {
     return this.http.delete<Link>(`${this.API}/${id}`).pipe(first());
+  }
+
+  increaseCounter(link: Link){
+    return this.http.put<Link>(`${this.API}/${link.id}/increasecounter`, link).pipe(first());
   }
 
   private update(record: Partial<Link>) {

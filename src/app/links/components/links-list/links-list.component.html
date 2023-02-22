@@ -28,7 +28,7 @@
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <a mat-button href="{{ host }}/{{ link.slug }}" target="_blank" title="Ir para {{ link.original }}" class="link">
+            <a mat-button href="{{ host }}/{{ link.slug }}" target="_blank" title="Ir para {{ link.original }}" class="link" (click)="onClick()">
               {{ host+"/"+link.slug | truncateText : 35 }}
             </a>
             <button mat-icon-button color="primary" [cdkCopyToClipboard]="host+'/'+link.slug" (click)="onCopied()"

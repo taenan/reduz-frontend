@@ -6,7 +6,8 @@
     <app-links-list
       *ngIf="links$ | async as links; else loading"
       [links]="links"
-      (remove)="onRemove($event)">
+      (remove)="onRemove($event)"
+      (refresh)="refresh()">
     </app-links-list>
 
     <ng-template #loading>

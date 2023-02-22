@@ -30,17 +30,18 @@ export class LinkViewComponent implements OnInit {
           )
         : EMPTY
       )
-    ).subscribe((link: Link) => link ? window.location.href = link.original : this.onError())
-
-    // if (this.route.params && this.route.params['slug']) {
-    //   this.service.loadBySlug(this.route.params['slug'])
-    //     .pipe(
-    //       tap({ error: e => this.onError() }),
-    //       catchError(() => EMPTY)
-    //     ).subscribe((link: Link) => link ? window.location.href = link.original : this.onError());
-    // } else {
-    //   this.onError()
-    // }
+    ).subscribe((link: Link) => {
+      if (link) {
+        this.service.increaseCounter(link).subscribe(
+          {
+            next: () => window.location.href = link.original,
+            error: e => this.onError()
+          }
+        )
+      } else {
+        this.onError()
+      }
+    })
   }
 
   onError() {
