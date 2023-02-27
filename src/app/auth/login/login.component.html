@@ -1,0 +1,37 @@
+<div class="login-page">
+  <mat-card class="login-card">
+    <mat-toolbar color="primary">Reduz - Login</mat-toolbar>
+
+    <mat-card-content>
+      <mat-icon color="primary" class="mat-icon-size">account_circle</mat-icon>
+      <form [formGroup]="form" class="min-width">
+
+        <mat-form-field class="full-width">
+          <mat-label>Usuário</mat-label>
+          <input matInput formControlName="username" #username />
+          <mat-error *ngIf="form.get('username')?.invalid">
+            {{ getErrorMessage('username') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" formControlName="password" #password />
+          <mat-error *ngIf="form.get('password')?.invalid">
+            {{ getErrorMessage('password') }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions class="actions-center">
+      <button mat-raised-button color="primary" (click)="onSubmit()" type="submit" class="button-icon">
+        <span class="button-icon-label">Entrar</span>
+        <mat-icon>send</mat-icon>
+      </button>
+      <button mat-raised-button routerLink="/register">
+        <span class="button-icon-label">Cadastre-se</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

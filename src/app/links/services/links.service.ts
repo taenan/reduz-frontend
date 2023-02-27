@@ -56,7 +56,7 @@ export class LinksService {
   }
 
   increaseCounter(link: Link){
-    return this.http.put<Link>(`${this.API}/${link.id}/increasecounter`, link).pipe(first());
+    return this.http.put<Link>(`${this.API}/public/${link.id}/increasecounter`, link).pipe(first());
   }
 
   private update(record: Partial<Link>) {
@@ -72,7 +72,7 @@ export class LinksService {
   }
 
   private getBySlug(slug: string) {
-    return this.http.get<Link>(`${this.API}/findbyslug?slug=${slug}`).pipe(first());
+    return this.http.get<Link>(`${this.API}/public/findbyslug?slug=${slug}`).pipe(first());
   }
   
 }

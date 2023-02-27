@@ -1,0 +1,31 @@
+.login-page{
+  align-items: center;
+  background-color: #e9ecef;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  min-height: 540.8px;
+}
+
+.login-card {
+  width: 400px;
+  min-height: 540.8px;
+}
+
+.mat-icon-size {
+  font-size: 100px;
+  height: 100px;
+  width: 100px;
+}
+
+.button-icon {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 10px;
+}
+
+.button-icon-label{
+  margin-right: 10px;
+}
+

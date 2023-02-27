@@ -68,6 +68,16 @@ export class FormUtilsService {
     if (field?.hasError('invalidUrl') && field.errors) {
       return `URL inválida.`;
     }
+
+    if (field?.hasError('invalidPasswordConfirmation') && field.errors) {
+      return `Senha e Confirmação de Senha não coincidem`;
+    }
+
+    if (field?.hasError('pattern') && field.errors) {
+      if(field.errors['pattern']['requiredPattern'] == '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$'){
+        return `Deve conter letras maiúsculas, minúsculas e números`;
+      }
+    }
     
     return field['errors'] ? 'Error' : '';
   }

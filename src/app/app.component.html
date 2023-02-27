@@ -1,4 +1,18 @@
-<mat-toolbar color="primary">
-  <h1 [routerLink]="['/']" style="cursor: pointer;">Reduz</h1>
-</mat-toolbar>
+<ng-template [ngIf]="authService.isAuthenticated() | async">
+  <mat-toolbar color="primary" class="example-toolbar mat-elevation-z6">
+    <h1 [routerLink]="['/']" style="cursor: pointer;">Reduz</h1>
+    <div class="example-toolbar">
+      <ng-template [ngIf]="authService.userLogged">
+        <h2 style="cursor: pointer;" mat-button [matMenuTriggerFor]="menu">Olá, {{ authService.userLogged.username }}</h2>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/passwordChange']">Alterar Senha</button>
+        </mat-menu>
+      </ng-template>
+      <h2 [routerLink]="['/links']" style="cursor: pointer;">Links</h2>
+      <h2 [routerLink]="['/categories']" style="cursor: pointer;">Categorias</h2>
+      <h2 (click)="authService.logout()" style="cursor: pointer;">Sair</h2>
+    </div>
+  </mat-toolbar>
+</ng-template>
+
 <router-outlet></router-outlet>
