@@ -1,12 +1,15 @@
+<ng-template [ngIf]="links.length == 0">
+  Nenhum link cadastrado.
+</ng-template>
 <mat-grid-list [cols]="cols" rowHeight="500px">
   <mat-grid-tile *ngFor="let link of links">
     <mat-card class="card">
       <div>
         <div class="actions">
-          <img mat-card-image [attr.src]="link.favicon">
+          <img mat-card-image [attr.src]="link.favicon" loading="lazy">
         </div>
         <mat-card-header class="card-header">
-          <div mat-card-avatar class="link-header-image"><img mat-card-image [attr.src]="link.favicon"></div>
+          <div mat-card-avatar class="link-header-image"><img mat-card-image [attr.src]="link.favicon" loading="lazy"></div>
           <mat-card-title>{{ link.title | truncateText }}</mat-card-title>
         </mat-card-header>
       </div>
@@ -20,7 +23,7 @@
           <mat-divider></mat-divider>
           <mat-list-item>
             <span class="mdc-list-item__secondary-text">Criação: {{ link.createdAt | datePt }} |
-              Cliques: {{ link.counter }}</span>
+              Acessos: {{ link.counter }}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>

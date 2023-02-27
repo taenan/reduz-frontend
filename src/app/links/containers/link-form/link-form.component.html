@@ -13,11 +13,11 @@
         <mat-card class="card">
           <div class="link-card">
             <mat-card-header class="card-header">
-              <div mat-card-avatar class="link-header-image"><img mat-card-image [attr.src]="defaultFavicon"></div>
+              <div mat-card-avatar class="link-header-image"><img mat-card-image [attr.src]="defaultFavicon" loading="lazy"></div>
               <mat-card-title>{{ form.get('title')?.value | truncateText }}</mat-card-title>
             </mat-card-header>
             <div class="actions">
-              <img mat-card-image [attr.src]="defaultFavicon">
+              <img mat-card-image [attr.src]="defaultFavicon" loading="lazy">
             </div>
           </div>
           <mat-form-field class="fill">
